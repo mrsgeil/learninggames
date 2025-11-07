@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0084)https://regendegenbucket.s3.amazonaws.com/volumes/CosmicMultiplicationAdventure.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosmic Multiplication Adventure</title>
     <style>
@@ -58,63 +58,109 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 10px;
+            padding: clamp(5px, 2vw, 10px);
             position: relative;
             z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: clamp(15px, 3vh, 20px);
             background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            padding: clamp(15px, 4vw, 20px);
             border-radius: 15px;
             border: 2px solid #00ffff;
             box-shadow: 0 0 30px #00ffff33;
+            max-width: 100%;
+            overflow: hidden;
+            flex-shrink: 0;
         }
         
         .title {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.2rem, 4vw, 2.2rem);
             font-weight: 900;
             color: #00ffff;
             text-shadow: 0 0 20px #00ffff;
-            margin-bottom: 10px;
+            margin-bottom: clamp(10px, 3vw, 15px);
+            line-height: 1.2;
+            word-break: break-word;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: clip;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(5px, 1.2vw, 8px);
+            flex-wrap: wrap;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .title span {
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        
+        .title span:nth-child(2) {
+            flex: 1;
+            min-width: 0;
+            text-align: center;
         }
         
         .level-info {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            justify-items: center;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: clamp(6px, 1.5vw, 8px);
+            margin-bottom: clamp(12px, 3vh, 18px);
+            max-width: 100%;
         }
         
         .stat {
             background: rgba(0, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: clamp(6px, 2vw, 8px) clamp(8px, 2.5vw, 12px);
+            border-radius: 15px;
             border: 1px solid #00ffff;
             font-weight: bold;
-            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            font-size: clamp(0.7rem, 2vw, 0.85rem);
+            text-align: center;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+            width: 100%;
+            max-width: 180px;
+            line-height: 1.3;
+            word-break: break-word;
+            hyphens: auto;
         }
         
         .controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+            justify-items: center;
+            gap: clamp(6px, 1.5vw, 10px);
+            margin-bottom: clamp(10px, 2.5vh, 15px);
+            max-width: 100%;
         }
         
         .question-area {
             background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
+            padding: clamp(15px, 4vw, 25px);
             border-radius: 15px;
             border: 2px solid #00ff00;
             box-shadow: 0 0 30px #00ff0033;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: clamp(15px, 3vh, 25px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 0;
         }
         
         .question {
@@ -134,16 +180,11 @@
             color: #ffff00;
             text-align: center;
             width: min(200px, 80vw);
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
+            display: block;
             font-family: 'Orbitron', monospace;
             font-weight: bold;
             -moz-appearance: textfield;
-            cursor: default;
-            caret-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
         }
         
         .answer-input::-webkit-outer-spin-button,
@@ -161,6 +202,16 @@
             font-size: 1.2rem;
             color: #ffff00;
             margin-bottom: 10px;
+        }
+        
+        .timer-warning {
+            color: #ff6666 !important;
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
         .keypad {
@@ -211,17 +262,27 @@
         }
         
         .btn {
-            padding: 10px 20px;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            padding: clamp(8px, 2.5vw, 12px) clamp(10px, 3vw, 15px);
+            font-size: clamp(0.7rem, 2.2vw, 1rem);
             font-weight: bold;
             border: 2px solid #00ffff;
-            border-radius: 25px;
+            border-radius: 20px;
             background: linear-gradient(45deg, #00ffff22, #00ffff44);
             color: #00ffff;
             cursor: pointer;
             transition: all 0.3s;
-            margin: 5px;
             font-family: 'Orbitron', monospace;
+            text-align: center;
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
+            width: 100%;
+            max-width: 200px;
+            line-height: 1.3;
+            /*word-break: break-word;
+            hyphens: auto;*/
+            min-height: clamp(40px, 8vw, 50px);
         }
         
         .btn:hover {
@@ -343,19 +404,2047 @@
         }
         
         @media (max-width: 768px) {
-            .container { padding: 5px; }
-            .header { padding: 10px; margin-bottom: 15px; }
-            .question-area { padding: 15px; margin-bottom: 15px; }
-            .level-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
-            .keypad { gap: 6px; }
-            .keypad-btn { padding: 10px; min-height: 45px; }
-            .modal-content { padding: 15px; }
-            .picture-item { font-size: 1rem; }
+            .container { 
+                padding: 8px; 
+                min-height: 100vh;
+            }
+            .header { 
+                padding: 18px; 
+                margin-bottom: 20px; 
+            }
+            .question-area { 
+                padding: 20px; 
+                margin-bottom: 20px;
+                flex: 1;
+                min-height: 300px;
+            }
+            .level-grid { 
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+                gap: 10px; 
+            }
+            .keypad { 
+                gap: 8px; 
+                margin: 25px auto;
+            }
+            .keypad-btn { 
+                padding: 12px; 
+                min-height: 50px; 
+                font-size: 1.3rem;
+            }
+            .modal-content { 
+                padding: 20px; 
+                max-height: 85vh;
+            }
+            .picture-item { 
+                font-size: 1.1rem; 
+            }
         }
         
         @media (max-height: 600px) {
             .title { font-size: 1.5rem; }
             .question { font-size: 2rem; }
+            .header { margin-bottom: 10px; }
+            .question-area { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="stars"><div class="star" style="left: 51.93%; top: 36.143%; width: 1.2245px; height: 1.2245px; animation-delay: 2.87588s;"></div><div class="star" style="left: 65.9813%; top: 65.0374%; width: 1.918px; height: 1.918px; animation-delay: 2.09232s;"></div><div class="star" style="left: 59.312%; top: 90.1344%; width: 1.00156px; height: 1.00156px; animation-delay: 1.8656s;"></div><div class="star" style="left: 69.4547%; top: 43.3206%; width: 2.56038px; height: 2.56038px; animation-delay: 1.05921s;"></div><div class="star" style="left: 85.2491%; top: 75.935%; width: 1.59339px; height: 1.59339px; animation-delay: 2.45059s;"></div><div class="star" style="left: 28.1938%; top: 55.7433%; width: 3.93498px; height: 3.93498px; animation-delay: 2.88183s;"></div><div class="star" style="left: 14.9299%; top: 86.0021%; width: 3.75998px; height: 3.75998px; animation-delay: 1.99818s;"></div><div class="star" style="left: 78.9394%; top: 57.8726%; width: 2.61695px; height: 2.61695px; animation-delay: 0.751367s;"></div><div class="star" style="left: 25.226%; top: 94.1995%; width: 1.88378px; height: 1.88378px; animation-delay: 0.802188s;"></div><div class="star" style="left: 47.8232%; top: 8.45063%; width: 3.94348px; height: 3.94348px; animation-delay: 0.962188s;"></div><div class="star" style="left: 36.5325%; top: 11.9319%; width: 1.56903px; height: 1.56903px; animation-delay: 2.88469s;"></div><div class="star" style="left: 20.2779%; top: 80.6157%; width: 1.73002px; height: 1.73002px; animation-delay: 2.38465s;"></div><div class="star" style="left: 74.6526%; top: 76.5466%; width: 1.99728px; height: 1.99728px; animation-delay: 1.70609s;"></div><div class="star" style="left: 94.1893%; top: 53.1087%; width: 3.60018px; height: 3.60018px; animation-delay: 1.05097s;"></div><div class="star" style="left: 64.167%; top: 84.4707%; width: 2.01811px; height: 2.01811px; animation-delay: 2.23023s;"></div><div class="star" style="left: 47.9881%; top: 21.0712%; width: 3.98457px; height: 3.98457px; animation-delay: 2.71102s;"></div><div class="star" style="left: 74.8469%; top: 47.383%; width: 3.25154px; height: 3.25154px; animation-delay: 2.50601s;"></div><div class="star" style="left: 88.5878%; top: 85.5752%; width: 2.02396px; height: 2.02396px; animation-delay: 1.33169s;"></div><div class="star" style="left: 30.4012%; top: 5.38553%; width: 3.6935px; height: 3.6935px; animation-delay: 1.47615s;"></div><div class="star" style="left: 33.5909%; top: 29.7012%; width: 2.13186px; height: 2.13186px; animation-delay: 0.651414s;"></div><div class="star" style="left: 77.8275%; top: 26.6134%; width: 2.98223px; height: 2.98223px; animation-delay: 2.21707s;"></div><div class="star" style="left: 91.1032%; top: 26.6168%; width: 1.58092px; height: 1.58092px; animation-delay: 0.0928568s;"></div><div class="star" style="left: 29.0808%; top: 12.2545%; width: 1.68955px; height: 1.68955px; animation-delay: 0.25051s;"></div><div class="star" style="left: 40.6028%; top: 48.596%; width: 1.62122px; height: 1.62122px; animation-delay: 1.28081s;"></div><div class="star" style="left: 52.6064%; top: 43.6042%; width: 1.06304px; height: 1.06304px; animation-delay: 1.40439s;"></div><div class="star" style="left: 72.9016%; top: 24.4783%; width: 3.21003px; height: 3.21003px; animation-delay: 0.0392917s;"></div><div class="star" style="left: 98.1599%; top: 95.311%; width: 2.43524px; height: 2.43524px; animation-delay: 2.43997s;"></div><div class="star" style="left: 67.5119%; top: 88.3675%; width: 1.47249px; height: 1.47249px; animation-delay: 0.291239s;"></div><div class="star" style="left: 42.7377%; top: 35.663%; width: 1.72812px; height: 1.72812px; animation-delay: 0.872326s;"></div><div class="star" style="left: 33.3437%; top: 94.2726%; width: 1.42919px; height: 1.42919px; animation-delay: 2.76758s;"></div><div class="star" style="left: 84.7462%; top: 60.4931%; width: 1.30272px; height: 1.30272px; animation-delay: 1.56378s;"></div><div class="star" style="left: 86.2514%; top: 47.903%; width: 3.77993px; height: 3.77993px; animation-delay: 2.77114s;"></div><div class="star" style="left: 64.4538%; top: 80.9722%; width: 1.00098px; height: 1.00098px; animation-delay: 0.636603s;"></div><div class="star" style="left: 5.88899%; top: 13.1713%; width: 1.29037px; height: 1.29037px; animation-delay: 0.997351s;"></div><div class="star" style="left: 66.6468%; top: 45.8103%; width: 2.08557px; height: 2.08557px; animation-delay: 1.96371s;"></div><div class="star" style="left: 81.9351%; top: 55.238%; width: 2.86852px; height: 2.86852px; animation-delay: 2.52184s;"></div><div class="star" style="left: 59.6982%; top: 80.0669%; width: 2.02707px; height: 2.02707px; animation-delay: 1.58718s;"></div><div class="star" style="left: 57.4558%; top: 96.5494%; width: 2.02678px; height: 2.02678px; animation-delay: 2.34725s;"></div><div class="star" style="left: 76.9834%; top: 85.8818%; width: 2.9171px; height: 2.9171px; animation-delay: 0.990934s;"></div><div class="star" style="left: 61.5874%; top: 57.7948%; width: 2.86656px; height: 2.86656px; animation-delay: 0.742723s;"></div><div class="star" style="left: 67.3402%; top: 5.09384%; width: 2.37593px; height: 2.37593px; animation-delay: 0.784754s;"></div><div class="star" style="left: 44.3919%; top: 88.6223%; width: 2.5206px; height: 2.5206px; animation-delay: 1.85137s;"></div><div class="star" style="left: 85.4398%; top: 87.2807%; width: 2.72507px; height: 2.72507px; animation-delay: 2.24111s;"></div><div class="star" style="left: 57.1068%; top: 19.5512%; width: 3.86599px; height: 3.86599px; animation-delay: 0.953938s;"></div><div class="star" style="left: 84.4145%; top: 53.8316%; width: 2.78149px; height: 2.78149px; animation-delay: 0.789382s;"></div><div class="star" style="left: 76.1073%; top: 12.2887%; width: 3.10595px; height: 3.10595px; animation-delay: 0.979083s;"></div><div class="star" style="left: 72.3831%; top: 31.4039%; width: 2.58675px; height: 2.58675px; animation-delay: 1.7128s;"></div><div class="star" style="left: 65.8191%; top: 62.2689%; width: 2.93592px; height: 2.93592px; animation-delay: 1.75827s;"></div><div class="star" style="left: 24.8042%; top: 1.43712%; width: 3.61401px; height: 3.61401px; animation-delay: 1.85209s;"></div><div class="star" style="left: 55.025%; top: 67.9963%; width: 3.05249px; height: 3.05249px; animation-delay: 1.36957s;"></div><div class="star" style="left: 13.5855%; top: 8.9906%; width: 2.68506px; height: 2.68506px; animation-delay: 0.348987s;"></div><div class="star" style="left: 28.907%; top: 99.0457%; width: 1.2209px; height: 1.2209px; animation-delay: 1.54525s;"></div><div class="star" style="left: 3.99996%; top: 54.5543%; width: 3.57018px; height: 3.57018px; animation-delay: 2.00017s;"></div><div class="star" style="left: 14.073%; top: 34.9414%; width: 1.44992px; height: 1.44992px; animation-delay: 1.79417s;"></div><div class="star" style="left: 44.4803%; top: 99.1115%; width: 2.16535px; height: 2.16535px; animation-delay: 2.99014s;"></div><div class="star" style="left: 86.8293%; top: 15.7075%; width: 3.95228px; height: 3.95228px; animation-delay: 2.20197s;"></div><div class="star" style="left: 15.0775%; top: 94.7817%; width: 1.74587px; height: 1.74587px; animation-delay: 0.543905s;"></div><div class="star" style="left: 30.2323%; top: 66.8299%; width: 3.71668px; height: 3.71668px; animation-delay: 2.05323s;"></div><div class="star" style="left: 35.4739%; top: 45.8026%; width: 3.33236px; height: 3.33236px; animation-delay: 0.145192s;"></div><div class="star" style="left: 23.1253%; top: 21.9703%; width: 1.85072px; height: 1.85072px; animation-delay: 0.81215s;"></div><div class="star" style="left: 13.4214%; top: 79.4834%; width: 3.34741px; height: 3.34741px; animation-delay: 2.29134s;"></div><div class="star" style="left: 16.3067%; top: 31.2033%; width: 2.53527px; height: 2.53527px; animation-delay: 2.72945s;"></div><div class="star" style="left: 98.448%; top: 39.8361%; width: 1.78492px; height: 1.78492px; animation-delay: 1.56154s;"></div><div class="star" style="left: 42.5709%; top: 66.9017%; width: 3.10973px; height: 3.10973px; animation-delay: 1.22607s;"></div><div class="star" style="left: 88.1719%; top: 66.8004%; width: 1.62978px; height: 1.62978px; animation-delay: 1.24578s;"></div><div class="star" style="left: 36.421%; top: 2.8732%; width: 3.60484px; height: 3.60484px; animation-delay: 1.08984s;"></div><div class="star" style="left: 13.8884%; top: 20.9584%; width: 3.49072px; height: 3.49072px; animation-delay: 0.233281s;"></div><div class="star" style="left: 46.3656%; top: 65.9976%; width: 2.65325px; height: 2.65325px; animation-delay: 1.26893s;"></div><div class="star" style="left: 46.9903%; top: 90.9293%; width: 1.25979px; height: 1.25979px; animation-delay: 2.90888s;"></div><div class="star" style="left: 82.4476%; top: 69.639%; width: 1.14753px; height: 1.14753px; animation-delay: 1.96744s;"></div><div class="star" style="left: 47.6311%; top: 22.8024%; width: 2.60286px; height: 2.60286px; animation-delay: 2.26929s;"></div><div class="star" style="left: 72.0491%; top: 72.5984%; width: 1.62943px; height: 1.62943px; animation-delay: 0.616788s;"></div><div class="star" style="left: 11.499%; top: 23.1672%; width: 3.67503px; height: 3.67503px; animation-delay: 0.962215s;"></div><div class="star" style="left: 43.3367%; top: 60.3893%; width: 2.21838px; height: 2.21838px; animation-delay: 1.41657s;"></div><div class="star" style="left: 33.6214%; top: 27.1808%; width: 2.3835px; height: 2.3835px; animation-delay: 1.31032s;"></div><div class="star" style="left: 61.5661%; top: 83.7126%; width: 2.0703px; height: 2.0703px; animation-delay: 2.71744s;"></div><div class="star" style="left: 33.5783%; top: 11.6513%; width: 2.87171px; height: 2.87171px; animation-delay: 1.89381s;"></div><div class="star" style="left: 51.4695%; top: 92.216%; width: 2.09741px; height: 2.09741px; animation-delay: 1.62609s;"></div><div class="star" style="left: 47.6611%; top: 89.9616%; width: 2.37485px; height: 2.37485px; animation-delay: 1.53672s;"></div><div class="star" style="left: 30.532%; top: 41.0463%; width: 1.11022px; height: 1.11022px; animation-delay: 1.50814s;"></div><div class="star" style="left: 93.1005%; top: 77.3621%; width: 3.1849px; height: 3.1849px; animation-delay: 2.01414s;"></div><div class="star" style="left: 93.3065%; top: 67.9301%; width: 1.71374px; height: 1.71374px; animation-delay: 1.41871s;"></div><div class="star" style="left: 6.51292%; top: 79.2912%; width: 3.63973px; height: 3.63973px; animation-delay: 1.70854s;"></div><div class="star" style="left: 32.9174%; top: 92.8612%; width: 3.87933px; height: 3.87933px; animation-delay: 0.55486s;"></div><div class="star" style="left: 87.5992%; top: 33.433%; width: 3.06883px; height: 3.06883px; animation-delay: 0.0478853s;"></div><div class="star" style="left: 41.5836%; top: 37.5927%; width: 3.62282px; height: 3.62282px; animation-delay: 2.68112s;"></div><div class="star" style="left: 69.7142%; top: 17.8666%; width: 2.55588px; height: 2.55588px; animation-delay: 1.33497s;"></div><div class="star" style="left: 54.0843%; top: 15.7193%; width: 3.86821px; height: 3.86821px; animation-delay: 0.0632593s;"></div><div class="star" style="left: 1.89753%; top: 16.823%; width: 2.11422px; height: 2.11422px; animation-delay: 1.61379s;"></div><div class="star" style="left: 13.897%; top: 0.684484%; width: 3.54179px; height: 3.54179px; animation-delay: 0.0583294s;"></div><div class="star" style="left: 69.5639%; top: 75.0661%; width: 2.21029px; height: 2.21029px; animation-delay: 2.12473s;"></div><div class="star" style="left: 62.8589%; top: 45.2575%; width: 3.64209px; height: 3.64209px; animation-delay: 2.28328s;"></div><div class="star" style="left: 68.171%; top: 91.4177%; width: 3.17034px; height: 3.17034px; animation-delay: 2.41381s;"></div><div class="star" style="left: 58.4151%; top: 27.6268%; width: 1.44342px; height: 1.44342px; animation-delay: 1.69437s;"></div><div class="star" style="left: 40.64%; top: 92.6738%; width: 3.87464px; height: 3.87464px; animation-delay: 1.22825s;"></div><div class="star" style="left: 69.8562%; top: 34.0868%; width: 3.17413px; height: 3.17413px; animation-delay: 0.00175736s;"></div><div class="star" style="left: 94.9088%; top: 59.4727%; width: 3.18796px; height: 3.18796px; animation-delay: 2.92779s;"></div><div class="star" style="left: 46.5993%; top: 89.3215%; width: 2.12077px; height: 2.12077px; animation-delay: 1.40452s;"></div><div class="star" style="left: 83.0185%; top: 8.90221%; width: 3.81986px; height: 3.81986px; animation-delay: 0.597272s;"></div><div class="star" style="left: 16.2814%; top: 92.3769%; width: 1.6819px; height: 1.6819px; animation-delay: 0.833475s;"></div><div class="planet" style="left: 16.1756%; top: 24.7704%; width: 23.9811px; height: 23.9811px; background: rgb(255, 107, 107); box-shadow: rgb(255, 107, 107) 0px 0px 20px; animation-delay: 0.885238s;"></div><div class="planet" style="left: 35.641%; top: 78.0213%; width: 21.4037px; height: 21.4037px; background: rgb(78, 205, 196); box-shadow: rgb(78, 205, 196) 0px 0px 20px; animation-delay: 4.83358s;"></div><div class="planet" style="left: 42.5179%; top: 30.8141%; width: 39.146px; height: 39.146px; background: rgb(69, 183, 209); box-shadow: rgb(69, 183, 209) 0px 0px 20px; animation-delay: 1.69199s;"></div><div class="planet" style="left: 59.9008%; top: 79.3542%; width: 28.7436px; height: 28.7436px; background: rgb(150, 206, 180); box-shadow: rgb(150, 206, 180) 0px 0px 20px; animation-delay: 4.22869s;"></div><div class="planet" style="left: 1.6693%; top: 9.26243%; width: 41.4879px; height: 41.4879px; background: rgb(255, 234, 167); box-shadow: rgb(255, 234, 167) 0px 0px 20px; animation-delay: 3.97761s;"></div></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">
+                <span>🚀</span>
+                <span>COSMIC MULTIPLICATION ADVENTURE</span>
+                <span style="display: inline-block; transform: scaleX(-1);">🚀</span>
+            </h1>
+            <div class="level-info">
+                <div class="stat" id="levelDisplay">Level 1: Zero Zone (×0)</div>
+                <div class="stat" id="scoreDisplay">Score: 0</div>
+                <div class="stat" id="streakDisplay">Streak: 0</div>
+                <div class="stat" id="progressDisplay">Progress: 0/8</div>
+            </div>
+            <div class="controls">
+                <button class="btn btn-small" onclick="showLevelSelector()">🌟 Choose Level</button>
+                <button class="btn btn-small" id="soundToggle" onclick="toggleSound()">🔊 Sound ON</button>
+                <button class="btn btn-small" id="timerToggle" onclick="toggleTimer()">⏱️ Timer OFF</button>
+                <button class="btn btn-small" id="timerOptions" onclick="showTimerOptions()" style="display: none;">⚙️ Timer Settings</button>
+                <button class="btn btn-small" onclick="showSpeedGuide()">❓ Speed Guide</button>
+            </div>
+            <div class="timer-display" id="timerDisplay" style="display: none;">Time: 0s</div>
+        </div>
+        
+        <div id="questionArea" class="question-area">
+            <div class="question" id="question">3 × 0 = ?</div>
+            <input type="number" class="answer-input" id="answerInput" placeholder="?" autofocus="">
+            
+            <div class="keypad" id="keypad">
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="addDigit(&#39;7&#39;)">7</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;8&#39;)">8</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;9&#39;)">9</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="addDigit(&#39;4&#39;)">4</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;5&#39;)">5</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;6&#39;)">6</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn" onclick="addDigit(&#39;1&#39;)">1</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;2&#39;)">2</button>
+                    <button class="keypad-btn" onclick="addDigit(&#39;3&#39;)">3</button>
+                </div>
+                <div class="keypad-row">
+                    <button class="keypad-btn keypad-zero" onclick="addDigit(&#39;0&#39;)">0</button>
+                    <button class="keypad-btn keypad-clear" onclick="clearAnswer()">Clear</button>
+                    <button class="keypad-btn" onclick="checkAnswer()" style="background: rgba(0, 255, 0, 0.2); border-color: #00ff00; color: #00ff00;">Enter</button>
+                </div>
+            </div>
+            
+            <div>
+                <button class="btn" onclick="checkAnswer()">Check Answer ⚡</button>
+                <button class="btn btn-secondary" onclick="skipQuestion()">Skip Question →</button>
+            </div>
+        </div>
+        
+        <div id="miniGame" class="mini-game" style="display: none;">
+            <h2 style="color: #ff00ff; margin-bottom: 20px;">🎮 BONUS MINI-GAME! 🎮</h2>
+            <canvas id="gameCanvas" class="game-canvas" width="500" height="300"></canvas>
+            <div style="margin-top: 15px; color: #ffff00;">
+                <div id="gameInstructions">Get ready for an awesome challenge!</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Level Selector Modal -->
+    <div id="levelSelectorModal" class="modal">
+        <div class="modal-content">
+            <h2 style="text-align: center; color: #00ffff; margin-bottom: 20px;">🌌 Choose Your Cosmic Adventure 🌌</h2>
+            <div id="levelGrid" class="level-grid"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="closeLevelSelector()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Timer Settings Modal -->
+    <div id="timerSettingsModal" class="modal">
+        <div class="modal-content">
+            <h2 style="text-align: center; color: #ffff00; margin-bottom: 20px;">⏱️ Timer Challenge Settings ⏱️</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 20px 0;">
+                <button class="btn" onclick="setTimerMode(&#39;countdown&#39;, 60)" style="padding: 12px 8px; max-width: none; height: auto; min-height: 80px;">
+                    <div style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 3px;">⏰</div>
+                    <div style="font-size: clamp(0.7rem, 2vw, 0.9rem); line-height: 1.1;">1 Min Challenge</div>
+                    <div style="font-size: clamp(0.6rem, 1.5vw, 0.7rem); color: #00ffff; margin-top: 2px;">Beat the clock!</div>
+                </button>
+                <button class="btn" onclick="setTimerMode(&#39;countdown&#39;, 120)" style="padding: 12px 8px; max-width: none; height: auto; min-height: 80px;">
+                    <div style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 3px;">⏰⏰</div>
+                    <div style="font-size: clamp(0.7rem, 2vw, 0.9rem); line-height: 1.1;">2 Min Challenge</div>
+                    <div style="font-size: clamp(0.6rem, 1.5vw, 0.7rem); color: #00ffff; margin-top: 2px;">More time</div>
+                </button>
+                <button class="btn" onclick="setTimerMode(&#39;countdown&#39;, 300)" style="padding: 12px 8px; max-width: none; height: auto; min-height: 80px;">
+                    <div style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 3px;">⏰⏰⏰</div>
+                    <div style="font-size: clamp(0.7rem, 2vw, 0.9rem); line-height: 1.1;">5 Min Challenge</div>
+                    <div style="font-size: clamp(0.6rem, 1.5vw, 0.7rem); color: #00ffff; margin-top: 2px;">Relaxed</div>
+                </button>
+                <button class="btn btn-secondary" onclick="setTimerMode(&#39;stopwatch&#39;, 0)" style="padding: 12px 8px; max-width: none; height: auto; min-height: 80px;">
+                    <div style="font-size: clamp(1rem, 3vw, 1.2rem); margin-bottom: 3px;">⏱️</div>
+                    <div style="font-size: clamp(0.7rem, 2vw, 0.9rem); line-height: 1.1;">Stopwatch</div>
+                    <div style="font-size: clamp(0.6rem, 1.5vw, 0.7rem); color: #ffff00; margin-top: 2px;">Track speed</div>
+                </button>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeTimerSettings()">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Speed Guide Modal -->
+    <div id="speedGuideModal" class="modal">
+        <div class="modal-content">
+            <h2 style="text-align: center; color: #00ff00; margin-bottom: 20px;">🚀 Speed Guide &amp; Tips 🚀</h2>
+            
+            <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <h3 style="color: #00ffff; margin-bottom: 10px;">⏱️ Expected Questions Per Minute:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                    <div style="text-align: center; padding: 10px; background: rgba(0, 255, 0, 0.1); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: #00ff00;">🐌 Beginner</div>
+                        <div style="color: #ffffff;">8-12 questions</div>
+                        <div style="font-size: 0.8rem; color: #00ffff;">Take your time!</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(255, 255, 0, 0.1); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: #ffff00;">🚶 Learning</div>
+                        <div style="color: #ffffff;">15-20 questions</div>
+                        <div style="font-size: 0.8rem; color: #00ffff;">Getting faster!</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(255, 165, 0, 0.1); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: #ffa500;">🏃 Good</div>
+                        <div style="color: #ffffff;">25-30 questions</div>
+                        <div style="font-size: 0.8rem; color: #00ffff;">Nice pace!</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(255, 0, 255, 0.1); border-radius: 8px;">
+                        <div style="font-size: 1.5rem; color: #ff00ff;">🚀 Expert</div>
+                        <div style="color: #ffffff;">35+ questions</div>
+                        <div style="font-size: 0.8rem; color: #00ffff;">Lightning fast!</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <h3 style="color: #ffff00; margin-bottom: 10px;">💡 Speed Tips:</h3>
+                <ul style="color: #ffffff; line-height: 1.6; padding-left: 20px;">
+                    <li><strong>0 &amp; 1 facts:</strong> Instant! Zero makes everything zero, one keeps it the same</li>
+                    <li><strong>2 facts:</strong> Just double the number (2×7 = 7+7 = 14)</li>
+                    <li><strong>5 facts:</strong> Always end in 0 or 5 (5×6 = 30, 5×7 = 35)</li>
+                    <li><strong>10 facts:</strong> Add a zero to the end (10×8 = 80)</li>
+                    <li><strong>9 facts:</strong> The digits add up to 9 (9×4 = 36, 3+6 = 9)</li>
+                    <li><strong>Practice daily:</strong> Even 5 minutes helps build speed!</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(0, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                <h3 style="color: #00ff00; margin-bottom: 10px;">🎯 Challenge Yourself:</h3>
+                <p style="color: #ffffff; line-height: 1.6;">
+                    Start with easier levels (0, 1, 2, 5, 10) to build confidence and speed. 
+                    Once you can do 20+ questions per minute on these, move to harder facts like 6, 7, 8, 9. 
+                    The mixed levels will really test your mastery!
+                </p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="closeSpeedGuide()">Ready to Practice! 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explanation Modal -->
+    <div id="explanationModal" class="modal">
+        <div class="modal-content">
+            <h2 style="text-align: center; color: #00ff00; margin-bottom: 20px;">📚 Let's Learn Together! 📚</h2>
+            <div id="explanationContent"></div>
+            <div class="picture-representations">
+                <h3 style="color: #00ffff; text-align: center; margin-bottom: 15px;">📊 Visual Learning</h3>
+                
+                <!--<div style="background: rgba(255, 0, 255, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                    <h4 style="color: #ff00ff; margin-bottom: 8px; font-size: 0.9rem;">🔢 Skip Counting Visual:</h4>
+                    <div id="pictureSkip"></div>
+                </div>-->
+                
+                <div style="background: rgba(0, 255, 0, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                    <h4 style="color: #00ff00; margin-bottom: 8px; font-size: 0.9rem;">👥 Groups Method:</h4>
+                    <div id="pictureGroups" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
+                </div>
+                
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                    <h4 style="color: #00ffff; margin-bottom: 8px; font-size: 0.9rem;">📋 Array Method:</h4>
+                    <div id="pictureArray"></div>
+                </div>
+                
+                <div id="answerVisual" style="display: flex; flex-wrap: wrap; justify-content: center; margin: 15px 0;"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn" onclick="closeExplanation()">Got it! Let's continue! 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let currentLevel = 1;
+        let score = 0;
+        let streak = 0;
+        let questionsAnswered = 0;
+        let currentQuestion = {};
+        let soundEnabled = true;
+        let timerEnabled = false;
+        let timerMode = 'stopwatch';
+        let timerDuration = 0;
+        let startTime = 0;
+        let timerInterval = null;
+        let questionsInSession = 0;
+        let currentMiniGame = 0;
+        
+        // Mastery tracking
+        let wrongAnswersInLevel = 0;
+        let strugglingThreshold = 5;
+        let masteryBonus = false;
+        
+        // Level unlocking system
+        let unlockedLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Levels 1-12 start unlocked
+        let completedLevels = [];
+        
+        // Level definitions
+        const levels = {
+            1: { name: 'Zero Zone', factors: [0], icon: '⭕', color: '#666666', questionsNeeded: 8 },
+            2: { name: 'Unity Station', factors: [1], icon: '1️⃣', color: '#ffffff', questionsNeeded: 8 },
+            3: { name: 'Rocket Launch', factors: [2], icon: '🚀', color: '#ff6b6b', questionsNeeded: 10 },
+            4: { name: 'Moon Base', factors: [3], icon: '🌙', color: '#4ecdc4', questionsNeeded: 12 },
+            5: { name: 'Mars Colony', factors: [4], icon: '🔴', color: '#ff9f43', questionsNeeded: 12 },
+            6: { name: 'Asteroid Belt', factors: [5], icon: '☄️', color: '#feca57', questionsNeeded: 10 },
+            7: { name: 'Jupiter Station', factors: [6], icon: '🪐', color: '#48dbfb', questionsNeeded: 15 },
+            8: { name: 'Saturn Rings', factors: [7], icon: '💫', color: '#ff9ff3', questionsNeeded: 18 },
+            9: { name: 'Uranus Outpost', factors: [8], icon: '🌌', color: '#54a0ff', questionsNeeded: 18 },
+            10: { name: 'Neptune Deep', factors: [9], icon: '🌊', color: '#5f27cd', questionsNeeded: 20 },
+            11: { name: 'Pluto Edge', factors: [10], icon: '❄️', color: '#00d2d3', questionsNeeded: 12 },
+            12: { name: 'Galaxy Core', factors: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], icon: '🌌', color: '#a55eea', questionsNeeded: 25 },
+            13: { name: 'Solar Wind', factors: [11], icon: '☀️', color: '#ff6348', questionsNeeded: 15 },
+            14: { name: 'Cosmic Storm', factors: [12], icon: '⚡', color: '#2ed573', questionsNeeded: 15 },
+            15: { name: 'Master Explorer', factors: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], icon: '👑', color: '#ffd700', questionsNeeded: 30, master: true },
+            16: { name: 'Cosmic Champion', factors: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], icon: '🏆', color: '#ff00ff', questionsNeeded: 50, master: true, timerRequired: true, timeLimit: 250 },
+            17: { name: 'Universe Master', factors: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], icon: '⭐', color: '#00ffff', questionsNeeded: 50, master: true, timerRequired: true, timeLimit: 250 }
+        };
+        
+        // Generate a multiplication question
+        function generateQuestion() {
+            const level = levels[currentLevel];
+            const factors = level.factors;
+            
+            let factor1, factor2;
+            
+            if (factors.length === 1) {
+                factor1 = factors[0];
+                const maxFactor = currentLevel <= 12 ? 10 : 12;
+                factor2 = Math.floor(Math.random() * (maxFactor + 1));
+            } else {
+                factor1 = factors[Math.floor(Math.random() * factors.length)];
+                
+                if (currentLevel <= 12) {
+                    factor2 = Math.floor(Math.random() * 11);
+                } else {
+                    const rand = Math.random();
+                    if (rand < 0.3) {
+                        factor2 = Math.floor(Math.random() * 6);
+                    } else if (rand < 0.7) {
+                        factor2 = Math.floor(Math.random() * 4) + 6;
+                    } else {
+                        factor2 = Math.floor(Math.random() * 3) + 10;
+                    }
+                }
+            }
+            
+            if (Math.random() < 0.5) {
+                [factor1, factor2] = [factor2, factor1];
+            }
+            
+            currentQuestion = {
+                factor1: factor1,
+                factor2: factor2,
+                answer: factor1 * factor2
+            };
+            
+            document.getElementById('question').textContent = `${factor1} × ${factor2} = ?`;
+            document.getElementById('answerInput').value = '';
+        }
+        
+        // Timer functions
+        let timerPaused = false;
+        let pausedTime = 0;
+        let totalPausedTime = 0;
+        
+        function updateTimer() {
+            if (timerEnabled && startTime && !timerPaused) {
+                const elapsed = Math.floor((Date.now() - startTime - totalPausedTime) / 1000);
+                
+                if (timerMode === 'countdown') {
+                    const remaining = Math.max(0, timerDuration - elapsed);
+                    const minutes = Math.floor(remaining / 60);
+                    const seconds = remaining % 60;
+                    
+                    const timerDisplay = document.getElementById('timerDisplay');
+                    timerDisplay.textContent = `Time Left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (remaining <= 30) {
+                        timerDisplay.classList.add('timer-warning');
+                    } else {
+                        timerDisplay.classList.remove('timer-warning');
+                    }
+                    
+                    if (remaining <= 0) {
+                        endTimerSession();
+                    }
+                } else {
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    document.getElementById('timerDisplay').textContent = 
+                        `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }
+        }
+        
+        function pauseTimer() {
+            if (timerEnabled && !timerPaused) {
+                timerPaused = true;
+                pausedTime = Date.now();
+            }
+        }
+        
+        function resumeTimer() {
+            if (timerEnabled && timerPaused) {
+                totalPausedTime += Date.now() - pausedTime;
+                timerPaused = false;
+                pausedTime = 0;
+            }
+        }
+        
+        function checkTimerRequirement() {
+            const level = levels[currentLevel];
+            if (level.timerRequired && !timerEnabled) {
+                timerEnabled = true;
+                timerMode = 'countdown';
+                timerDuration = level.timeLimit;
+                
+                const btn = document.getElementById('timerToggle');
+                const optionsBtn = document.getElementById('timerOptions');
+                const display = document.getElementById('timerDisplay');
+                
+                btn.textContent = '⏱️ Timer ON';
+                optionsBtn.style.display = 'inline-block';
+                display.style.display = 'block';
+                
+                questionsInSession = 0;
+                startTime = Date.now();
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+                
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 100);
+                
+                showFeedback(`⏰ Champion Level: ${Math.floor(level.timeLimit/60)} minute timer activated!`, '#ff00ff');
+            }
+        }
+        
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('soundToggle');
+            btn.textContent = soundEnabled ? '🔊 Sound ON' : '🔇 Sound OFF';
+        }
+        
+        function toggleTimer() {
+            const level = levels[currentLevel];
+            
+            if (level.timerRequired && timerEnabled) {
+                showFeedback('Timer required for Champion levels! ⏰', '#ff6666');
+                return;
+            }
+            
+            timerEnabled = !timerEnabled;
+            const btn = document.getElementById('timerToggle');
+            const optionsBtn = document.getElementById('timerOptions');
+            const display = document.getElementById('timerDisplay');
+            
+            btn.textContent = timerEnabled ? '⏱️ Timer ON' : '⏱️ Timer OFF';
+            optionsBtn.style.display = timerEnabled ? 'inline-block' : 'none';
+            display.style.display = timerEnabled ? 'block' : 'none';
+            
+            if (timerEnabled) {
+                questionsInSession = 0;
+                startTime = Date.now();
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+                
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 100);
+            } else {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+            }
+        }
+        
+        function showTimerOptions() {
+            const level = levels[currentLevel];
+            
+            if (level.timerRequired) {
+                showFeedback('Timer settings locked for Champion levels! 🔒', '#ff6666');
+                return;
+            }
+            
+            document.getElementById('timerSettingsModal').style.display = 'flex';
+        }
+        
+        function closeTimerSettings() {
+            document.getElementById('timerSettingsModal').style.display = 'none';
+        }
+        
+        function setTimerMode(mode, duration) {
+            timerMode = mode;
+            timerDuration = duration;
+            questionsInSession = 0;
+            
+            if (timerEnabled) {
+                startTime = Date.now();
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+                
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 100);
+            }
+            
+            closeTimerSettings();
+            
+            let message = '';
+            if (mode === 'countdown') {
+                const minutes = Math.floor(duration / 60);
+                message = `${minutes} minute challenge started! 🚀`;
+            } else {
+                message = 'Stopwatch mode activated! ⏱️';
+            }
+            showFeedback(message, '#ffff00');
+        }
+        
+        function endTimerSession() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            const elapsed = Math.floor((Date.now() - startTime - totalPausedTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            const questionsPerMinute = questionsInSession > 0 && elapsed > 0 ? Math.round((questionsInSession / elapsed) * 60) : 0;
+            
+            let performance = '';
+            let performanceColor = '#ffff00';
+            if (questionsPerMinute >= 35) {
+                performance = '🚀 Expert Level!';
+                performanceColor = '#ff00ff';
+            } else if (questionsPerMinute >= 25) {
+                performance = '🏃 Great Speed!';
+                performanceColor = '#ffa500';
+            } else if (questionsPerMinute >= 15) {
+                performance = '🚶 Good Pace!';
+                performanceColor = '#ffff00';
+            } else {
+                performance = '🐌 Keep Practicing!';
+                performanceColor = '#00ff00';
+            }
+            
+            const level = levels[currentLevel];
+            const isChampionLevel = level.timerRequired;
+            
+            document.getElementById('questionArea').innerHTML = `
+                <h2 style="color: #ffff00;">⏱️ Timer Challenge Complete! ⏱️</h2>
+                <div style="font-size: 2rem; margin: 20px 0; color: ${performanceColor};">${performance}</div>
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <div style="font-size: 1.5rem; color: #00ffff; margin-bottom: 15px;">📊 Your Results:</div>
+                    <div style="color: #ffffff; font-size: 1.2rem; line-height: 1.8;">
+                        <div>⏰ Time: ${minutes}:${seconds.toString().padStart(2, '0')}</div>
+                        <div>✅ Questions Answered: ${questionsInSession}</div>
+                        <div>🚀 Speed: ${questionsPerMinute} questions/minute</div>
+                        <div>🎯 Current Score: ${score} points</div>
+                        ${isChampionLevel ? `<div style="color: #ff00ff;">🏆 Champion Level Progress: ${questionsInSession}/${level.questionsNeeded}</div>` : ''}
+                    </div>
+                </div>
+                ${isChampionLevel && questionsInSession < level.questionsNeeded ? `
+                    <div style="background: rgba(255, 100, 100, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <div style="color: #ff6666; font-size: 1.1rem; margin-bottom: 10px;">⏰ Time's Up!</div>
+                        <div style="color: #ffffff;">
+                            Champion levels require completing all ${level.questionsNeeded} questions within the time limit. 
+                            You answered ${questionsInSession} questions. Keep practicing to build your speed!
+                        </div>
+                    </div>
+                ` : ''}
+                <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                    <div style="color: #ffff00; font-size: 1.1rem; margin-bottom: 10px;">💡 Speed Comparison:</div>
+                    <div style="color: #ffffff;">
+                        ${questionsPerMinute >= 35 ? 'Amazing! You\'re at expert level! 🏆' :
+                          questionsPerMinute >= 25 ? 'Great job! You\'re getting really fast! 🌟' :
+                          questionsPerMinute >= 15 ? 'Good progress! Keep practicing to get faster! 📈' :
+                          'Take your time and focus on accuracy first. Speed will come! 💪'}
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button class="btn" onclick="restartPractice()">Practice More 🚀</button>
+                    <button class="btn btn-secondary" onclick="showSpeedGuide()">View Speed Guide 📊</button>
+                </div>
+            `;
+        }
+        
+        function showSpeedGuide() {
+            document.getElementById('speedGuideModal').style.display = 'flex';
+        }
+        
+        function closeSpeedGuide() {
+            document.getElementById('speedGuideModal').style.display = 'none';
+        }
+        
+        function restartPractice() {
+            document.getElementById('questionArea').innerHTML = `
+                <div class="question" id="question">0 × 3 = ?</div>
+                <input type="text" class="answer-input" id="answerInput" placeholder="?">
+                
+                <div class="keypad" id="keypad">
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('7')">7</button>
+                        <button class="keypad-btn" onclick="addDigit('8')">8</button>
+                        <button class="keypad-btn" onclick="addDigit('9')">9</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('4')">4</button>
+                        <button class="keypad-btn" onclick="addDigit('5')">5</button>
+                        <button class="keypad-btn" onclick="addDigit('6')">6</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('1')">1</button>
+                        <button class="keypad-btn" onclick="addDigit('2')">2</button>
+                        <button class="keypad-btn" onclick="addDigit('3')">3</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn keypad-zero" onclick="addDigit('0')">0</button>
+                        <button class="keypad-btn keypad-clear" onclick="clearAnswer()">Clear</button>
+                        <button class="keypad-btn" onclick="checkAnswer()" style="background: rgba(0, 255, 0, 0.2); border-color: #00ff00; color: #00ff00;">Enter</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <button class="btn" onclick="checkAnswer()">Check Answer ⚡</button>
+                    <button class="btn btn-secondary" onclick="skipQuestion()">Skip Question →</button>
+                </div>
+            `;
+            
+            questionsInSession = 0;
+            if (timerEnabled) {
+                startTime = Date.now();
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+                
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(updateTimer, 100);
+            }
+            
+            generateQuestion();
+            setupInput();
+        }
+        
+        function addDigit(digit) {
+            const input = document.getElementById('answerInput');
+            input.value += digit;
+        }
+        
+        function clearAnswer() {
+            const input = document.getElementById('answerInput');
+            input.value = '';
+        }
+        
+        let isCheckingAnswer = false;
+        
+        function checkAnswer() {
+            if (isCheckingAnswer) return;
+            
+            const input = document.getElementById('answerInput');
+            if (!input || input.value.trim() === '') return;
+            
+            isCheckingAnswer = true;
+            const userAnswer = parseInt(input.value);
+            const correctAnswer = currentQuestion.answer;
+            
+            if (isNaN(userAnswer)) {
+                isCheckingAnswer = false;
+                return;
+            }
+            
+            if (userAnswer === correctAnswer) {
+                if (timerEnabled) questionsInSession++;
+                
+                pauseTimer();
+                
+                const timeBonus = 0;
+                score += (10 + streak * 2 + timeBonus);
+                streak++;
+                questionsAnswered++;
+                
+                if (questionsAnswered >= levels[currentLevel].questionsNeeded && wrongAnswersInLevel === 0 && currentLevel !== 16 && currentLevel !== 17) {
+                    masteryBonus = true;
+                }
+                
+                let feedback = 'Correct! ⭐';
+                if (streak >= 5) feedback = 'Amazing streak! 🔥';
+                if (streak >= 8) feedback = 'Incredible! You\'re a master! 🏆';
+                
+                showFeedback(feedback, '#00ff00');
+                if (soundEnabled) playSound('correct');
+                
+                if (questionsAnswered >= levels[currentLevel].questionsNeeded) {
+                    setTimeout(() => {
+                        isCheckingAnswer = false;
+                        startMiniGame();
+                    }, 1500);
+                } else {
+                    const level = levels[currentLevel];
+                    const shouldShowMiniGame = level.questionsNeeded >= 20 && questionsAnswered % 10 === 0;
+                    
+                    if (shouldShowMiniGame) {
+                        setTimeout(() => {
+                            isCheckingAnswer = false;
+                            startMiniGame(false);
+                        }, 1500);
+                    } else {
+                        setTimeout(() => {
+                            isCheckingAnswer = false;
+                            resumeTimer();
+                            generateQuestion();
+                            updateDisplay();
+                            setupInput();
+                        }, 1500);
+                    }
+                }
+            } else {
+                pauseTimer();
+                streak = 0;
+                wrongAnswersInLevel++;
+                masteryBonus = false;
+                
+                const level = levels[currentLevel];
+                const isStruggling = wrongAnswersInLevel >= strugglingThreshold && 
+                                   currentLevel > 1 && 
+                                   !level.timerRequired && 
+                                   level.factors.length === 1 && 
+                                   questionsAnswered < level.questionsNeeded * 0.3;
+                
+                if (isStruggling) {
+                    setTimeout(() => {
+                        isCheckingAnswer = false;
+                        showStruggleSupport();
+                    }, 100);
+                } else {
+                    setTimeout(() => {
+                        isCheckingAnswer = false;
+                        showExplanation();
+                    }, 100);
+                }
+                
+                if (soundEnabled) playSound('incorrect');
+            }
+            
+            updateDisplay();
+        }
+        
+        function skipQuestion() {
+            if (isCheckingAnswer) return;
+            
+            isCheckingAnswer = true;
+            if (timerEnabled) questionsInSession++;
+            wrongAnswersInLevel++;
+            
+            pauseTimer();
+            
+            setTimeout(() => {
+                isCheckingAnswer = false;
+                showExplanation();
+            }, 100);
+        }
+        
+        function showMasteryAdvancement() {
+            const modal = document.getElementById('explanationModal');
+            const content = document.getElementById('explanationContent');
+            
+            content.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🏆✨🚀</div>
+                    <h2 style="color: #ffd700; margin-bottom: 20px;">INCREDIBLE MASTERY!</h2>
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                        <p style="color: #ffffff; font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px;">
+                            🌟 You got all ${levels[currentLevel].questionsNeeded} questions right with a perfect streak!
+                        </p>
+                        <p style="color: #00ffff; font-size: 1.1rem; line-height: 1.6;">
+                            You've completely mastered Level ${currentLevel}: ${levels[currentLevel].name}!
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <h3 style="color: #00ffff; margin-bottom: 15px;">🚀 Ready for a Challenge?</h3>
+                        <p style="color: #ffffff; margin-bottom: 15px;">
+                            Since you're doing so amazingly well, would you like to:
+                        </p>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px 0; max-width: 100%;">
+                            <button class="btn" onclick="skipToAdvancedLevel()" style="padding: 20px; font-size: clamp(1rem, 2.5vw, 1.2rem); min-height: 100px; white-space: normal; line-height: 1.4; flex: 1; min-width: 250px; max-width: 350px;">
+                                🚀 Skip ahead 2 levels!<br><span style="font-size: 0.9rem;">(Go to Level ${Math.min(currentLevel + 2, 17)})</span>
+                            </button>
+                            <button class="btn btn-secondary" onclick="proceedNormally()" style="padding: 20px; font-size: clamp(1rem, 2.5vw, 1.2rem); min-height: 100px; white-space: normal; line-height: 1.4; flex: 1; min-width: 250px; max-width: 350px;">
+                                🎯 Continue normally<br><span style="font-size: 0.9rem;">(Go to Level ${currentLevel + 1})</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <p style="color: #ffff00; font-size: 0.9rem;">
+                            💡 Don't worry - if the advanced level is too hard, we can always go back to practice more!
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            const pictureSection = modal.querySelector('.picture-representations');
+            if (pictureSection) {
+                pictureSection.style.display = 'none';
+            }
+            
+            const defaultButton = modal.querySelector('button[onclick="closeExplanation()"]');
+            if (defaultButton) {
+                defaultButton.style.display = 'none';
+            }
+            
+            modal.style.display = 'flex';
+        }
+        
+        function showStruggleSupport() {
+            const modal = document.getElementById('explanationModal');
+            const content = document.getElementById('explanationContent');
+            
+            const easierLevel = Math.max(1, currentLevel - 1);
+            
+            content.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">💪🌟💙</div>
+                    <h2 style="color: #00ffff; margin-bottom: 20px;">You're Learning Great!</h2>
+                    <div style="background: rgba(0, 255, 255, 0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                        <p style="color: #ffffff; font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px;">
+                            🌟 Learning takes practice, and you're doing awesome by trying!
+                        </p>
+                        <p style="color: #ffff00; font-size: 1.1rem; line-height: 1.6;">
+                            Level ${currentLevel} (${levels[currentLevel].name}) seems a bit tricky right now.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <h3 style="color: #00ff00; margin-bottom: 15px;">💡 Let's Build Your Confidence!</h3>
+                        <p style="color: #ffffff; margin-bottom: 15px;">
+                            Would you like to:
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                            <button class="btn" onclick="goToEasierLevel(${easierLevel})" style="padding: 15px; font-size: 1.1rem;">
+                                🌟 Practice Level ${easierLevel} (${levels[easierLevel].name}) first
+                            </button>
+                            <button class="btn btn-secondary" onclick="stayAndLearn()" style="padding: 15px; font-size: 1.1rem;">
+                                💪 Keep trying Level ${currentLevel} - I can do this!
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <p style="color: #ffff00; font-size: 0.9rem;">
+                            🎯 Remember: Every expert was once a beginner. You're doing great!
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            const { factor1, factor2, answer } = currentQuestion;
+            content.innerHTML += `
+                <div style="border-top: 2px solid #00ffff; margin-top: 20px; padding-top: 20px;">
+                    <h3 style="color: #00ffff; text-align: center; margin-bottom: 15px;">📚 Let's Learn This One Together!</h3>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 2.5rem; color: #00ff00; margin-bottom: 10px;">
+                            ${factor1} × ${factor2} = ${answer}
+                        </div>
+                        <div style="font-size: 1.2rem; color: #ffff00;">
+                            ${getExplanationText(factor1, factor2, answer)}
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 0, 255, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                        <h4 style="color: #ff00ff; margin-bottom: 10px;">🔢 Skip Counting:</h4>
+                        <div style="color: #ffffff; line-height: 1.6; font-size: 1.1rem;">
+                            <div style="margin-bottom: 8px;">
+                                <strong>By ${factor2}s:</strong> ${getSkipCountingSequence(factor2, factor1)}
+                            </div>
+                            <div>
+                                <strong>By ${factor1}s:</strong> ${getSkipCountingSequence(factor1, factor2)}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                        <h4 style="color: #ffff00; margin-bottom: 10px;">🧠 Memory Trick:</h4>
+                        <p style="color: #ffffff; line-height: 1.6;">
+                            ${getMemoryTrick(factor1, factor2, answer)}
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            const pictureSection = modal.querySelector('.picture-representations');
+            if (pictureSection) {
+                pictureSection.style.display = 'block';
+            }
+            
+            const defaultButton = modal.querySelector('button[onclick="closeExplanation()"]');
+            if (defaultButton) {
+                defaultButton.style.display = 'inline-block';
+            }
+            
+            document.getElementById('pictureGroups').innerHTML = '';
+            document.getElementById('pictureArray').innerHTML = '';
+            //document.getElementById('pictureSkip').innerHTML = '';
+            document.getElementById('answerVisual').innerHTML = '';
+            
+            createPictureRepresentations(factor1, factor2, answer);
+            
+            modal.style.display = 'flex';
+        }
+        
+        function showExplanation() {
+            const modal = document.getElementById('explanationModal');
+            const content = document.getElementById('explanationContent');
+            
+            document.getElementById('pictureGroups').innerHTML = '';
+            document.getElementById('pictureArray').innerHTML = '';
+            //document.getElementById('pictureSkip').innerHTML = '';
+            document.getElementById('answerVisual').innerHTML = '';
+            
+            const { factor1, factor2, answer } = currentQuestion;
+            
+            content.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="font-size: 2.5rem; color: #00ff00; margin-bottom: 10px;">
+                        ${factor1} × ${factor2} = ${answer}
+                    </div>
+                    <div style="font-size: 1.2rem; color: #ffff00;">
+                        ${getExplanationText(factor1, factor2, answer)}
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 0, 255, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h4 style="color: #ff00ff; margin-bottom: 10px;">🔢 Skip Counting:</h4>
+                    <div style="color: #ffffff; line-height: 1.6; font-size: 1.1rem;">
+                        <div style="margin-bottom: 8px;">
+                            <strong>By ${factor2}s (${factor1} times):</strong> ${getSkipCountingSequence(factor2, factor1)}
+                        </div>
+                        <div>
+                            <strong>By ${factor1}s (${factor2} times):</strong> ${getSkipCountingSequence(factor1, factor2)}
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h4 style="color: #00ffff; margin-bottom: 10px;">💡 Think of it this way:</h4>
+                    <p style="color: #ffffff; line-height: 1.6;">
+                        ${getThinkingExplanation(factor1, factor2, answer)}
+                    </p>
+                </div>
+                
+                <div style="background: rgba(255, 255, 0, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <h4 style="color: #ffff00; margin-bottom: 10px;">🧠 Memory Trick:</h4>
+                    <p style="color: #ffffff; line-height: 1.6;">
+                        ${getMemoryTrick(factor1, factor2, answer)}
+                    </p>
+                </div>
+            `;
+            
+            const pictureSection = modal.querySelector('.picture-representations');
+            if (pictureSection) {
+                pictureSection.style.display = 'block';
+            }
+            
+            const defaultButton = modal.querySelector('button[onclick="closeExplanation()"]');
+            if (defaultButton) {
+                defaultButton.style.display = 'inline-block';
+            }
+            
+            createPictureRepresentations(factor1, factor2, answer);
+            
+            modal.style.display = 'flex';
+        }
+        
+        function getExplanationText(factor1, factor2, answer) {
+            if (factor1 === 0 || factor2 === 0) {
+                return `"${factor1} groups of ${factor2}" or "${factor2} groups of ${factor1}" - anything times zero equals zero!`;
+            } else if (factor1 === 1 || factor2 === 1) {
+                return `"${factor1} groups of ${factor2}" or "${factor2} groups of ${factor1}" - anything times one stays the same!`;
+            } else {
+                return `"${factor1} groups of ${factor2}" or "${factor2} groups of ${factor1}"`;
+            }
+        }
+        
+        function getSkipCountingSequence(skipBy, times) {
+            if (skipBy === 0) {
+                return '0 (zero makes everything zero!)';
+            } else if (times === 0) {
+                return '0 (zero groups means nothing!)';
+            } else if (skipBy === 1) {
+                const sequence = Array.from({length: times}, (_, i) => i + 1).join(', ');
+                return `${sequence} (counting by 1s)`;
+            } else if (times === 1) {
+                return `${skipBy} (just one jump!)`;
+            } else {
+                const sequence = Array.from({length: times}, (_, i) => skipBy * (i + 1)).join(', ');
+                return sequence;
+            }
+        }
+        
+        function getThinkingExplanation(factor1, factor2, answer) {
+            if (factor1 === 0 || factor2 === 0) {
+                return `When you multiply by zero, you get zero! If you have ${Math.max(factor1, factor2)} groups of nothing (0), you still have nothing. Zero is like an empty box - no matter how many empty boxes you have, they're still empty!`;
+            } else if (factor1 === 1 || factor2 === 1) {
+                return `When you multiply by one, the number stays the same! If you have 1 group of ${Math.max(factor1, factor2)}, you just have ${Math.max(factor1, factor2)}. One is like a magic number that doesn't change anything!`;
+            } else {
+                return `${factor1} × ${factor2} means you have ${factor1} groups, and each group has ${factor2} items. You can think of it as adding ${factor2} to itself ${factor1} times, or making ${factor1} groups of ${factor2} objects each.`;
+            }
+        }
+        
+        function getMemoryTrick(factor1, factor2, answer) {
+            if (factor1 === 0 || factor2 === 0) {
+                return 'Zero Hero! Anything times zero equals zero. Zero is like a black hole that makes everything disappear!';
+            } else if (factor1 === 1 || factor2 === 1) {
+                return 'One is Fun! Anything times one stays the same. One is the identity - it never changes a number!';
+            } else if (factor1 === 2 || factor2 === 2) {
+                return 'Double it! Add the number to itself. 2×7 = 7+7 = 14 or 2×9 = 9+9 = 18';
+            } else if (factor1 === 3 || factor2 === 3) {
+                return 'Count by 3s: 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33... Or, you can triple it and use repeated addition! 3×5 = 5+5+5 = 15';
+            } else if (factor1 === 4 || factor2 === 4) {
+                return 'Double, then double again! 4×6 = (2×6)×2 = 12×2 = 24';
+            } else if (factor1 === 5 || factor2 === 5) {
+                return 'Always ends in 0 or 5. Count by 5s: 5, 10, 15, 20, 25, 30... You can also think of it like a clock, counting by 5s!';
+            } else if (factor1 === 6 || factor2 === 6) {
+                return 'Count by 6s: 6, 12, 18, 24, 30, 36... When you multiply a 6 by an even number, the last digit of the answer is the same as the last digit of the number you are multiplying by (6×4=24, 6×8=48)';
+            } else if (factor1 === 7 || factor2 === 7) {
+                return 'Lucky 7! Count by 7s: 7, 14, 21, 28, 35, 42, 49... Practice makes perfect!';
+            } else if (factor1 === 8 || factor2 === 8) {
+                return 'Double three times! 8×5 = (2×5)×4 = 10×4 = 40. 8×3 = (2×3)×4 = 6×4 = 24 Or, you can count by 8s: 8, 16, 24, 32, 40...';
+            } else if (factor1 === 9 || factor2 === 9) {
+                return 'Fingers trick! Bend down the finger you are multiplying by, then count the fingers on each side. Or count by 9s: 9, 18, 27, 36, 45... The digits always add up to 9!';
+            } else if (factor1 === 10 || factor2 === 10) {
+                return 'Just add a zero to the end! 10×7 = 70';
+            } else if (factor1 === 11 || factor2 === 11) {
+                return 'Up to 9: Super Simple 11s! Just double the number! (Like 11×3=33). For 11×10, just add a zero. It is magic!';
+            } else if (factor1 === 12 || factor2 === 12) {
+                return 'A Dozen! Think of 12 things in a group. There are 12 eggs in a carton and 12 months in a year. Practice counting by 12s! 12, 24, 36, 48, 60... Think 12×12=144 (12 dozen eggs)';
+            }
+            
+            return `Practice this one! ${factor1} × ${factor2} = ${answer}`;
+        }
+        
+        let currentFeedback = null;
+        let feedbackTimeout = null;
+        
+        function showFeedback(message, color) {
+            if (feedbackTimeout) {
+                clearTimeout(feedbackTimeout);
+                feedbackTimeout = null;
+            }
+            
+            if (currentFeedback && document.body.contains(currentFeedback)) {
+                document.body.removeChild(currentFeedback);
+                currentFeedback = null;
+            }
+            
+            const feedback = document.createElement('div');
+            feedback.style.position = 'fixed';
+            feedback.style.top = '50%';
+            feedback.style.left = '50%';
+            feedback.style.transform = 'translate(-50%, -50%)';
+            feedback.style.fontSize = 'clamp(2rem, 6vw, 3rem)';
+            feedback.style.fontWeight = 'bold';
+            feedback.style.color = color;
+            feedback.style.textShadow = `0 0 20px ${color}`;
+            feedback.style.zIndex = '2000';
+            feedback.style.pointerEvents = 'none';
+            feedback.style.background = 'rgba(0, 0, 0, 0.8)';
+            feedback.style.padding = '20px';
+            feedback.style.borderRadius = '15px';
+            feedback.style.border = `2px solid ${color}`;
+            feedback.textContent = message;
+            
+            currentFeedback = feedback;
+            document.body.appendChild(feedback);
+            
+            feedbackTimeout = setTimeout(() => {
+                if (currentFeedback === feedback && document.body.contains(feedback)) {
+                    document.body.removeChild(feedback);
+                    currentFeedback = null;
+                }
+                feedbackTimeout = null;
+            }, 1500);
+        }
+        
+        let currentAudioContext = null;
+        let soundTimeout = null;
+        
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            if (currentAudioContext) {
+                try {
+                    currentAudioContext.close();
+                } catch (e) {}
+                currentAudioContext = null;
+            }
+            
+            if (soundTimeout) {
+                clearTimeout(soundTimeout);
+                soundTimeout = null;
+            }
+            
+            try {
+                currentAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = currentAudioContext.createOscillator();
+                const gainNode = currentAudioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(currentAudioContext.destination);
+                
+                if (type === 'correct') {
+                    oscillator.frequency.setValueAtTime(523.25, currentAudioContext.currentTime);
+                    oscillator.frequency.setValueAtTime(659.25, currentAudioContext.currentTime + 0.1);
+                    oscillator.frequency.setValueAtTime(783.99, currentAudioContext.currentTime + 0.2);
+                } else {
+                    oscillator.frequency.setValueAtTime(220, currentAudioContext.currentTime);
+                    oscillator.frequency.setValueAtTime(196, currentAudioContext.currentTime + 0.1);
+                }
+                
+                gainNode.gain.setValueAtTime(0.1, currentAudioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, currentAudioContext.currentTime + 0.3);
+                
+                oscillator.start(currentAudioContext.currentTime);
+                oscillator.stop(currentAudioContext.currentTime + 0.3);
+                
+                soundTimeout = setTimeout(() => {
+                    if (currentAudioContext) {
+                        try {
+                            currentAudioContext.close();
+                        } catch (e) {}
+                        currentAudioContext = null;
+                    }
+                    soundTimeout = null;
+                }, 500);
+                
+            } catch (e) {
+                console.log('Sound effect:', type);
+                currentAudioContext = null;
+            }
+        }
+        
+        function updateDisplay() {
+            const level = levels[currentLevel];
+            document.getElementById('levelDisplay').textContent = 
+                `Level ${currentLevel}: ${level.name} ${level.factors.length === 1 ? '(×' + level.factors[0] + ')' : '(Mixed)'}`;
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
+            document.getElementById('streakDisplay').textContent = `Streak: ${streak}`;
+            document.getElementById('progressDisplay').textContent = 
+                `Progress: ${questionsAnswered}/${level.questionsNeeded}`;
+        }
+        
+        function startMiniGame(isLevelComplete = true) {
+            document.getElementById('questionArea').style.display = 'none';
+            document.getElementById('miniGame').style.display = 'block';
+            
+            startSpaceShooter(isLevelComplete);
+        }
+        
+        function startSpaceShooter(isLevelComplete = true) {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            if (window.innerWidth < 768) {
+                canvas.width = Math.min(400, window.innerWidth - 40);
+                canvas.height = 250;
+            }
+            
+            let player = { x: canvas.width/2, y: canvas.height - 40, width: 30, height: 20 };
+            let bullets = [];
+            let asteroids = [];
+            let gameTime = 0;
+            let asteroidsDestroyed = 0;
+            let gameRunning = true;
+            
+            const asteroidsNeeded = isLevelComplete ? 10 : 5;
+            const gameTitle = isLevelComplete ? 'Level Complete! Destroy 10 asteroids to advance!' : 'Great job! Quick break - destroy 5 asteroids!';
+            
+            document.getElementById('gameInstructions').textContent = gameTitle;
+            
+            function handleInput(e) {
+                if (!gameRunning) return;
+                
+                const rect = canvas.getBoundingClientRect();
+                let clientX, clientY;
+                
+                if (e.touches) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+                
+                player.x = clientX - rect.left - player.width/2;
+                player.y = clientY - rect.top - player.height/2;
+                
+                bullets.push({
+                    x: player.x + player.width/2,
+                    y: player.y,
+                    speed: 8
+                });
+            }
+            
+            canvas.addEventListener('mousemove', handleInput);
+            canvas.addEventListener('click', handleInput);
+            canvas.addEventListener('touchmove', handleInput);
+            canvas.addEventListener('touchstart', handleInput);
+            
+            function drawSpaceship(x, y) {
+                ctx.fillStyle = '#00ff00';
+                ctx.fillRect(x + 10, y + 10, 10, 15);
+                ctx.fillRect(x + 5, y + 15, 20, 5);
+                ctx.fillRect(x + 12, y + 5, 6, 10);
+                ctx.fillStyle = '#ffff00';
+                ctx.fillRect(x + 11, y + 20, 8, 3);
+                ctx.fillStyle = '#ff6600';
+                ctx.fillRect(x + 12, y + 21, 6, 2);
+            }
+            
+            function drawAsteroid(x, y, size) {
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(x, y + 5, size, size - 10);
+                ctx.fillRect(x + 3, y, size - 6, size);
+                ctx.fillRect(x + 5, y + 2, size - 10, size - 4);
+                
+                ctx.fillStyle = '#654321';
+                ctx.fillRect(x + 2, y + 3, 4, 4);
+                ctx.fillRect(x + size - 6, y + size - 8, 3, 3);
+                ctx.fillRect(x + size/2, y + size/3, 2, 2);
+            }
+            
+            function gameLoop() {
+                if (!gameRunning) return;
+                
+                ctx.fillStyle = '#000011';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#ffffff';
+                for (let i = 0; i < 30; i++) {
+                    const x = (i * 37) % canvas.width;
+                    const y = (i * 23 + gameTime) % canvas.height;
+                    const twinkle = Math.sin(gameTime * 0.1 + i) * 0.5 + 0.5;
+                    ctx.globalAlpha = twinkle;
+                    ctx.fillRect(x, y, 1, 1);
+                }
+                ctx.globalAlpha = 1;
+                
+                if (gameTime % 60 === 0) {
+                    const asteroidSize = 20 + Math.random() * 15;
+                    asteroids.push({
+                        x: Math.random() * (canvas.width - asteroidSize),
+                        y: -asteroidSize,
+                        width: asteroidSize,
+                        height: asteroidSize,
+                        speed: 1.5 + Math.random() * 2,
+                        rotation: Math.random() * 360
+                    });
+                }
+                
+                for (let i = bullets.length - 1; i >= 0; i--) {
+                    const bullet = bullets[i];
+                    bullet.y -= bullet.speed;
+                    
+                    if (bullet.y < 0) {
+                        bullets.splice(i, 1);
+                        continue;
+                    }
+                    
+                    ctx.fillStyle = '#00ffff';
+                    ctx.fillRect(bullet.x - 1, bullet.y, 2, 12);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(bullet.x, bullet.y + 2, 1, 8);
+                }
+                
+                for (let i = asteroids.length - 1; i >= 0; i--) {
+                    const asteroid = asteroids[i];
+                    asteroid.y += asteroid.speed;
+                    asteroid.rotation += 2;
+                    
+                    if (asteroid.y > canvas.height) {
+                        asteroids.splice(i, 1);
+                        continue;
+                    }
+                    
+                    for (let j = bullets.length - 1; j >= 0; j--) {
+                        const bullet = bullets[j];
+                        if (bullet.x > asteroid.x && bullet.x < asteroid.x + asteroid.width &&
+                            bullet.y > asteroid.y && bullet.y < asteroid.y + asteroid.height) {
+                            asteroids.splice(i, 1);
+                            bullets.splice(j, 1);
+                            asteroidsDestroyed++;
+                            
+                            for (let k = 0; k < 8; k++) {
+                                ctx.fillStyle = k % 2 === 0 ? '#ffff00' : '#ff6600';
+                                const explosionX = asteroid.x + Math.random() * asteroid.width;
+                                const explosionY = asteroid.y + Math.random() * asteroid.height;
+                                ctx.fillRect(explosionX, explosionY, 3, 3);
+                            }
+                            
+                            if (asteroidsDestroyed >= asteroidsNeeded) {
+                                gameRunning = false;
+                                ctx.fillStyle = '#00ff00';
+                                ctx.font = 'bold 24px Orbitron';
+                                ctx.textAlign = 'center';
+                                ctx.fillText('MISSION COMPLETE!', canvas.width/2, canvas.height/2);
+                                ctx.font = 'bold 16px Orbitron';
+                                ctx.fillText('🚀 Asteroids Cleared! 🚀', canvas.width/2, canvas.height/2 + 30);
+                                
+                                setTimeout(() => {
+                                    if (isLevelComplete) {
+                                        nextLevel();
+                                    } else {
+                                        continuePractice();
+                                    }
+                                }, 2000);
+                                return;
+                            }
+                            break;
+                        }
+                    }
+                    
+                    ctx.save();
+                    ctx.translate(asteroid.x + asteroid.width/2, asteroid.y + asteroid.height/2);
+                    ctx.rotate(asteroid.rotation * Math.PI / 180);
+                    drawAsteroid(-asteroid.width/2, -asteroid.height/2, asteroid.width);
+                    ctx.restore();
+                }
+                
+                drawSpaceship(player.x, player.y);
+                
+                ctx.fillStyle = '#00ffff';
+                ctx.font = 'bold 16px Orbitron';
+                ctx.textAlign = 'left';
+                ctx.fillText(`🚀 Asteroids: ${asteroidsDestroyed}/${asteroidsNeeded}`, 10, 25);
+                
+                gameTime++;
+                requestAnimationFrame(gameLoop);
+            }
+            
+            gameLoop();
+        }
+        
+        function skipToAdvancedLevel() {
+            const targetLevel = Math.min(currentLevel + 2, 17);
+            
+            // Check if target level is unlocked
+            if (!unlockedLevels.includes(targetLevel)) {
+                showFeedback(`🔒 Level ${targetLevel} is locked! Complete more levels to unlock it.`, '#ff6666');
+                closeExplanation();
+                return;
+            }
+            
+            currentLevel = targetLevel;
+            resetLevelProgress();
+            closeExplanation();
+            showFeedback(`Skipped to Level ${currentLevel}! 🚀`, '#ffd700');
+        }
+        
+        function proceedNormally() {
+            const targetLevel = Math.min(currentLevel + 1, 17);
+            
+            // Check if target level is unlocked
+            if (!unlockedLevels.includes(targetLevel)) {
+                showFeedback(`🔒 Level ${targetLevel} is locked! Complete more levels to unlock it.`, '#ff6666');
+                closeExplanation();
+                return;
+            }
+            
+            currentLevel = targetLevel;
+            resetLevelProgress();
+            closeExplanation();
+            showFeedback(`Advanced to Level ${currentLevel}! ⭐`, '#00ff00');
+        }
+        
+        function goToEasierLevel(targetLevel) {
+            currentLevel = targetLevel;
+            resetLevelProgress();
+            closeExplanation();
+            showFeedback(`Let's master Level ${currentLevel} first! 💪`, '#00ffff');
+        }
+        
+        function stayAndLearn() {
+            closeExplanation();
+            showFeedback('You\'ve got this! Keep trying! 🌟', '#ffff00');
+        }
+        
+        function resetLevelProgress() {
+            questionsAnswered = 0;
+            wrongAnswersInLevel = 0;
+            masteryBonus = false;
+            updateDisplay();
+            generateQuestion();
+            
+            setTimeout(() => {
+                setupInput();
+            }, 150);
+            
+            checkTimerRequirement();
+        }
+        
+        function continuePractice() {
+            document.getElementById('miniGame').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'block';
+            
+            showFeedback(`Great break! Let's keep going! 🚀`, '#00ff00');
+            
+            resumeTimer();
+            generateQuestion();
+            updateDisplay();
+            
+            setTimeout(() => {
+                setupInput();
+            }, 200);
+        }
+        
+        function nextLevel() {
+            document.getElementById('miniGame').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'block';
+            
+            // Mark current level as completed
+            if (!completedLevels.includes(currentLevel)) {
+                completedLevels.push(currentLevel);
+            }
+            
+            // Check for level unlocks
+            checkLevelUnlocks();
+
+            if ((currentLevel === 15 || currentLevel === 16) && timerEnabled) {
+                toggleTimer();
+            }
+            
+            if (currentLevel < 17) {
+                const level = levels[currentLevel];
+                if (masteryBonus && wrongAnswersInLevel === 0 && currentLevel < 17 && !level.timerRequired) {
+                    showMasteryAdvancement();
+                } else {
+                    currentLevel++;
+                    resetLevelProgress();
+                    resumeTimer();
+                }
+            } else {
+                showGameComplete();
+            }
+        }
+
+    
+/*
+        function nextLevel() {
+            document.getElementById('miniGame').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'block';
+
+            // Mark current level as completed
+            if (!completedLevels.includes(currentLevel)) {
+                completedLevels.push(currentLevel);
+            }
+
+            // Check for level unlocks
+            checkLevelUnlocks();
+
+            // Use the new resetTimer function
+            if (currentLevel > 15){
+                resetTimer();
+            }
+            
+
+            // Determine the next level
+            let nextLevelId;
+            if (currentLevel < 17) {
+                const level = levels[currentLevel];
+                if (masteryBonus && wrongAnswersInLevel === 0 && currentLevel < 17 && !level.timerRequired) {
+                    showMasteryAdvancement();
+                    return;
+                } else {
+                    nextLevelId = currentLevel + 1;
+                }
+            } else {
+                showGameComplete();
+                return;
+            }
+
+            currentLevel = nextLevelId;
+            resetLevelProgress();
+
+            const nextLevelData = levels[currentLevel];
+
+            // Handle timer for the new level
+            if (nextLevelData.timerRequired) {
+                timerEnabled = true;
+                document.getElementById('timerToggle').textContent = '⏱️ Timer ON';
+                timerMode = 'countdown';
+                timerDuration = nextLevelData.timeLimit;
+                document.getElementById('timerDisplay').style.display = 'block';
+                startTimer();
+            } else {
+                if (timerEnabled) {
+                    timerEnabled = false;
+                    document.getElementById('timerToggle').textContent = '⏱️ Timer OFF';
+                    document.getElementById('timerDisplay').style.display = 'none';
+                }
+            }
+
+            generateQuestion();
+            updateDisplay();
+            setupInput();
+        }
+
+
+        function nextLevel() {
+            document.getElementById('miniGame').style.display = 'none';
+            document.getElementById('questionArea').style.display = 'block';
+
+            // Mark current level as completed
+            if (!completedLevels.includes(currentLevel)) {
+                completedLevels.push(currentLevel);
+            }
+
+            // Check for level unlocks
+            checkLevelUnlocks();
+
+            // Determine the next level. We'll check its properties to decide on timer behavior.
+            let nextLevelId;
+            if (currentLevel < 17) {
+                const level = levels[currentLevel];
+                if (masteryBonus && wrongAnswersInLevel === 0 && currentLevel < 17 && !level.timerRequired) {
+                    showMasteryAdvancement();
+                    return;
+                } else {
+                    nextLevelId = currentLevel + 1;
+                }
+            } else {
+                showGameComplete();
+                return;
+            }
+            
+            // Check if the next level is a champion level
+            const nextLevelData = levels[nextLevelId];
+            if (nextLevelData.timerRequired) {
+                // If the next level requires a timer, stop any existing one first.
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                
+                timerEnabled = true;
+                document.getElementById('timerToggle').textContent = '⏱️ Timer ON';
+                timerMode = 'countdown';
+                timerDuration = nextLevelData.timeLimit;
+                document.getElementById('timerDisplay').style.display = 'block';
+                
+                // Start a brand new timer for the champion level
+                questionsInSession = 0;
+                startTime = Date.now();
+                timerPaused = false;
+                pausedTime = 0;
+                totalPausedTime = 0;
+                timerInterval = setInterval(updateTimer, 100);
+            } else {
+                // If the next level is a regular level, simply resume the existing timer.
+                resumeTimer();
+            }
+
+            currentLevel = nextLevelId;
+            resetLevelProgress();
+            generateQuestion();
+            updateDisplay();
+            setupInput();
+        }*/
+        
+        function checkLevelUnlocks() {
+            let newUnlocks = [];
+            
+            // Beat level 12: unlock levels 13, 14, 15, 16
+            if (completedLevels.includes(12)) {
+                [13, 14, 15, 16].forEach(level => {
+                    if (!unlockedLevels.includes(level)) {
+                        unlockedLevels.push(level);
+                        newUnlocks.push(level);
+                    }
+                });
+            }
+            
+            // Beat level 15: unlock level 17
+            if (completedLevels.includes(15)) {
+                [17].forEach(level => {
+                    if (!unlockedLevels.includes(level)) {
+                        unlockedLevels.push(level);
+                        newUnlocks.push(level);
+                    }
+                });
+            }
+            
+            // Show unlock notification
+            if (newUnlocks.length > 0) {
+                setTimeout(() => {
+                    showUnlockNotification(newUnlocks);
+                }, 2);
+            }
+        }
+        
+        function showUnlockNotification(newLevels) {
+            const modal = document.getElementById('explanationModal');
+            const content = document.getElementById('explanationContent');
+            
+            content.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">🔓✨🎉</div>
+                    <h2 style="color: #ffd700; margin-bottom: 20px;">NEW LEVELS UNLOCKED!</h2>
+                    <div style="background: rgba(255, 215, 0, 0.1); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                        <p style="color: #ffffff; font-size: 1.2rem; line-height: 1.6; margin-bottom: 15px;">
+                            🌟 Congratulations! You've unlocked new cosmic adventures!
+                        </p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
+                            ${newLevels.map(levelNum => {
+                                const level = levels[levelNum];
+                                return `
+                                    <div style="background: rgba(${level.color === '#ff6348' ? '255, 99, 72' : 
+                                                                    level.color === '#2ed573' ? '46, 213, 115' : 
+                                                                    level.color === '#ffd700' ? '255, 215, 0' :
+                                                                    level.color === '#ff00ff' ? '255, 0, 255' :
+                                                                    '0, 255, 255'}, 0.2); padding: 15px; border-radius: 10px; border: 2px solid ${level.color};">
+                                        <div style="font-size: 2rem; margin-bottom: 8px;">${level.icon}</div>
+                                        <div style="color: ${level.color}; font-weight: bold; margin-bottom: 5px;">Level ${levelNum}</div>
+                                        <div style="color: #ffffff; font-size: 0.9rem;">${level.name}</div>
+                                        ${level.master ? '<div style="color: #ffd700; font-size: 0.8rem; margin-top: 5px;">🏆 Master Level</div>' : ''}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 10px; margin: 20px 0;">
+                        <p style="color: #00ffff; font-size: 1rem;">
+                            🚀 Ready to explore these new dimensions? Check the level selector to jump to any unlocked level!
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            const pictureSection = modal.querySelector('.picture-representations');
+            if (pictureSection) {
+                pictureSection.style.display = 'none';
+            }
+            
+            const defaultButton = modal.querySelector('button[onclick="closeExplanation()"]');
+            if (defaultButton) {
+                defaultButton.textContent = 'Awesome! Let\'s continue! 🚀';
+                defaultButton.style.display = 'inline-block';
+            }
+            
+            modal.style.display = 'flex';
+        }
+        
+        function showGameComplete() {
+            document.getElementById('questionArea').innerHTML = `
+                <h2 style="color: #00ff00;">🏆 ULTIMATE COSMIC CHAMPION! 🏆</h2>
+                <div style="font-size: 3rem; margin: 20px 0;">⭐⭐⭐⭐⭐</div>
+                <p style="color: #ffff00; font-size: 1.2rem;">You've conquered all multiplication dimensions!</p>
+                <p style="color: #ff00ff; font-size: 1.1rem;">Final Score: ${score} points</p>
+                <button class="btn" onclick="restartGame()" style="margin-top: 20px;">Enter New Dimension 🌌</button>
+            `;
+            createFireworks();
+            if (soundEnabled) playSound('celebration');
+        }
+        
+        function createFireworks() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.style.position = 'fixed';
+                    firework.style.left = Math.random() * window.innerWidth + 'px';
+                    firework.style.top = Math.random() * window.innerHeight + 'px';
+                    firework.style.width = '10px';
+                    firework.style.height = '10px';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.borderRadius = '50%';
+                    firework.style.pointerEvents = 'none';
+                    firework.style.zIndex = '3000';
+                    
+                    document.body.appendChild(firework);
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(firework)) {
+                            document.body.removeChild(firework);
+                        }
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+        
+        function restartGame() {
+            currentLevel = 1;
+            score = 0;
+            streak = 0;
+            questionsAnswered = 0;
+            wrongAnswersInLevel = 0;
+            masteryBonus = false;
+            
+            // Reset unlock system
+            unlockedLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+            completedLevels = [];
+            
+            document.getElementById('questionArea').innerHTML = `
+                <div class="question" id="question">0 × 3 = ?</div>
+                <input type="text" class="answer-input" id="answerInput" placeholder="?">
+                
+                <div class="keypad" id="keypad">
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('7')">7</button>
+                        <button class="keypad-btn" onclick="addDigit('8')">8</button>
+                        <button class="keypad-btn" onclick="addDigit('9')">9</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('4')">4</button>
+                        <button class="keypad-btn" onclick="addDigit('5')">5</button>
+                        <button class="keypad-btn" onclick="addDigit('6')">6</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn" onclick="addDigit('1')">1</button>
+                        <button class="keypad-btn" onclick="addDigit('2')">2</button>
+                        <button class="keypad-btn" onclick="addDigit('3')">3</button>
+                    </div>
+                    <div class="keypad-row">
+                        <button class="keypad-btn keypad-zero" onclick="addDigit('0')">0</button>
+                        <button class="keypad-btn keypad-clear" onclick="clearAnswer()">Clear</button>
+                        <button class="keypad-btn" onclick="checkAnswer()" style="background: rgba(0, 255, 0, 0.2); border-color: #00ff00; color: #00ff00;">Enter</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <button class="btn" onclick="checkAnswer()">Check Answer ⚡</button>
+                    <button class="btn btn-secondary" onclick="skipQuestion()">Skip Question →</button>
+                </div>
+            `;
+            
+            updateDisplay();
+            generateQuestion();
+        }
+        
+        function createCosmicBackground() {
+            const starsContainer = document.getElementById('stars');
+            
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+            
+            const planetColors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+            for (let i = 0; i < 5; i++) {
+                const planet = document.createElement('div');
+                planet.className = 'planet';
+                planet.style.left = Math.random() * 90 + '%';
+                planet.style.top = Math.random() * 80 + '%';
+                planet.style.width = Math.random() * 30 + 20 + 'px';
+                planet.style.height = planet.style.width;
+                planet.style.background = planetColors[i];
+                planet.style.boxShadow = `0 0 20px ${planetColors[i]}`;
+                planet.style.animationDelay = Math.random() * 6 + 's';
+                starsContainer.appendChild(planet);
+            }
+        }
+        
+        function createPictureRepresentations(factor1, factor2, answer) {
+            const emojis = ['🍎', '🌟', '🎈', '🍕', '🎯', '🏀', '🎁', '🌸', '🍪', '⚽', '🎨', '🚀'];
+            const chosenEmoji = emojis[Math.min(Math.max(factor1, factor2), emojis.length - 1)];
+            
+            if (factor1 === 0 || factor2 === 0) {
+                const pictureGroups = document.getElementById('pictureGroups');
+                if (pictureGroups) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'picture-group';
+                    groupDiv.innerHTML = `
+                        <div style="font-size: 2rem; color: #ff6666; margin: 20px;">∅</div>
+                        <div class="picture-group-label">Empty! Zero groups or zero items = nothing!</div>
+                    `;
+                    pictureGroups.appendChild(groupDiv);
+                }
+                
+                const pictureArray = document.getElementById('pictureArray');
+                if (pictureArray) {
+                    pictureArray.innerHTML = `
+                        <div style="text-align: center; color: #ff6666; font-size: 1.5rem; padding: 20px; border: 2px dashed #ff6666; border-radius: 10px;">
+                            Empty! Nothing to show because one factor is zero.
+                        </div>
+                    `;
+                }
+                return;
+            }
+            
+            // CORRECTED: First factor = number of groups, Second factor = items per group
+            const pictureGroups = document.getElementById('pictureGroups');
+            if (pictureGroups) {
+                const numGroups = factor1;
+                const itemsPerGroup = factor2;
+                
+                //const groupsToShow = Math.min(numGroups, 8);
+                //const itemsToShow = Math.min(itemsPerGroup, 10);
+                const groupsToShow = Math.min(numGroups, 12);
+                const itemsToShow = Math.min(itemsPerGroup, 12);
+                
+                for (let group = 0; group < groupsToShow; group++) {
+                    const groupDiv = document.createElement('div');
+                    groupDiv.className = 'picture-group';
+                    
+                    const itemsDiv = document.createElement('div');
+                    itemsDiv.className = 'picture-group-items';
+                    
+                    for (let item = 0; item < itemsToShow; item++) {
+                        const pictureItem = document.createElement('div');
+                        pictureItem.className = 'picture-item';
+                        pictureItem.textContent = chosenEmoji;
+                        itemsDiv.appendChild(pictureItem);
+                    }
+                    
+                    if (itemsPerGroup > itemsToShow) {
+                        const moreItems = document.createElement('div');
+                        moreItems.className = 'picture-item';
+                        moreItems.textContent = '...';
+                        moreItems.style.color = '#ffff00';
+                        itemsDiv.appendChild(moreItems);
+                    }
+                    
+                    const label = document.createElement('div');
+                    label.className = 'picture-group-label';
+                    label.textContent = `Group ${group + 1} (${itemsPerGroup} items)`;
+                    
+                    groupDiv.appendChild(itemsDiv);
+                    groupDiv.appendChild(label);
+                    pictureGroups.appendChild(groupDiv);
+                }
+                
+                if (numGroups > groupsToShow) {
+                    const moreGroups = document.createElement('div');
+                    moreGroups.className = 'picture-group';
+                    moreGroups.innerHTML = `
+                        <div style="color: #ffff00; font-size: 1.5rem; text-align: center; padding: 10px;">...</div>
+                        <div class="picture-group-label">+ ${numGroups - groupsToShow} more groups</div>
+                    `;
+                    pictureGroups.appendChild(moreGroups);
+                }
+                
+                const summaryDiv = document.createElement('div');
+                summaryDiv.style.textAlign = 'center';
+                summaryDiv.style.color = '#00ff00';
+                summaryDiv.style.fontSize = '1rem';
+                summaryDiv.style.fontWeight = 'bold';
+                summaryDiv.style.marginTop = '15px';
+                summaryDiv.style.padding = '10px';
+                summaryDiv.style.background = 'rgba(0, 255, 0, 0.1)';
+                summaryDiv.style.borderRadius = '8px';
+                summaryDiv.textContent = `${numGroups} groups × ${itemsPerGroup} items each = ${answer} total`;
+                pictureGroups.appendChild(summaryDiv);
+            }
+            
+            // Array representation - rows × columns
+            const pictureArray = document.getElementById('pictureArray');
+            if (pictureArray) {
+                pictureArray.innerHTML = '';
+                
+                let rows = factor1;
+                let cols = factor2;
+                
+                const arrayContainer = document.createElement('div');
+                arrayContainer.style.display = 'grid';
+                arrayContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+                arrayContainer.style.gap = '3px';
+                arrayContainer.style.maxWidth = '100%';
+                arrayContainer.style.maxHeight = '300px';
+                arrayContainer.style.overflowY = 'auto';
+                arrayContainer.style.overflowX = 'auto';
+                arrayContainer.style.margin = '10px auto';
+                arrayContainer.style.padding = '15px';
+                arrayContainer.style.border = '2px solid #00ffff';
+                arrayContainer.style.borderRadius = '8px';
+                arrayContainer.style.background = 'rgba(0, 255, 255, 0.05)';
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        const pictureItem = document.createElement('div');
+                        pictureItem.style.fontSize = 'clamp(0.8rem, 2vw, 1rem)';
+                        pictureItem.style.textAlign = 'center';
+                        pictureItem.style.padding = '2px';
+                        pictureItem.style.minWidth = '18px';
+                        pictureItem.style.minHeight = '18px';
+                        pictureItem.style.display = 'flex';
+                        pictureItem.style.alignItems = 'center';
+                        pictureItem.style.justifyContent = 'center';
+                        pictureItem.textContent = chosenEmoji;
+                        arrayContainer.appendChild(pictureItem);
+                    }
+                }
+                
+                pictureArray.appendChild(arrayContainer);
+                
+                if (rows * cols > 30) {
+                    const scrollHint = document.createElement('div');
+                    scrollHint.style.textAlign = 'center';
+                    scrollHint.style.color = '#ffff00';
+                    scrollHint.style.fontSize = '0.8rem';
+                    scrollHint.style.marginTop = '5px';
+                    scrollHint.style.fontStyle = 'italic';
+                    scrollHint.textContent = '📜 Scroll to see all items - every one is there to count!';
+                    pictureArray.appendChild(scrollHint);
+                }
+                
+                const arrayEquation = document.createElement('div');
+                arrayEquation.style.textAlign = 'center';
+                arrayEquation.style.color = '#00ff00';
+                arrayEquation.style.fontSize = 'clamp(1.2rem, 3vw, 1.5rem)';
+                arrayEquation.style.marginTop = '10px';
+                arrayEquation.style.fontWeight = 'bold';
+                arrayEquation.style.textShadow = '0 0 10px #00ff00';
+                arrayEquation.textContent = `${factor1} × ${factor2} = ${answer}`;
+                pictureArray.appendChild(arrayEquation);
+                
+                const arrayLabel = document.createElement('div');
+                arrayLabel.style.textAlign = 'center';
+                arrayLabel.style.color = '#00ffff';
+                arrayLabel.style.fontSize = 'clamp(0.8rem, 2vw, 0.9rem)';
+                arrayLabel.style.marginTop = '5px';
+                arrayLabel.style.fontWeight = 'bold';
+                arrayLabel.textContent = `${rows} rows × ${cols} columns = ${answer} items`;
+                pictureArray.appendChild(arrayLabel);
+            }
+        }
+        
+        function closeExplanation() {
+            document.getElementById('explanationModal').style.display = 'none';
+            resumeTimer();
+            generateQuestion();
+            updateDisplay();
+            
+            setTimeout(() => {
+                setupInput();
+            }, 200);
+        }
+        
+        function showLevelSelector() {
+            const modal = document.getElementById('levelSelectorModal');
+            const grid = document.getElementById('levelGrid');
+            
+            grid.innerHTML = '';
+            
+            for (let i = 1; i <= 17; i++) {
+                const level = levels[i];
+                const button = document.createElement('button');
+                const isUnlocked = unlockedLevels.includes(i);
+                const isCompleted = completedLevels.includes(i);
+                
+                button.className = 'btn';
+                
+                if (level.master && isUnlocked) {
+                    button.classList.add('master-badge');
+                }
+                
+                button.style.padding = '15px 10px';
+                button.style.height = 'auto';
+                button.style.minHeight = '100px';
+                button.style.maxWidth = 'none';
+                button.style.whiteSpace = 'normal';
+                button.style.lineHeight = '1.3';
+                
+                if (!isUnlocked) {
+                    // Locked level styling
+                    button.style.opacity = '0.4';
+                    button.style.cursor = 'not-allowed';
+                    button.style.borderColor = '#666666';
+                    button.style.color = '#666666';
+                    button.style.background = 'rgba(100, 100, 100, 0.1)';
+                    
+                    let unlockRequirement = '';
+                    if (i >= 13 && i <= 16) {
+                        unlockRequirement = 'Beat Level 12';
+                    } else if (i === 17) {
+                        unlockRequirement = 'Beat Level 15';
+                    }
+                    
+                    button.innerHTML = `
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">🔒</div>
+                        <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 3px;">Level ${i}</div>
+                        <div style="font-size: 0.8rem; margin-bottom: 5px;">${level.name}</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8; color: #ff6666;">
+                            ${unlockRequirement}
+                        </div>
+                    `;
+                    
+                    button.onclick = () => {
+                        showFeedback(`🔒 Complete ${unlockRequirement} to unlock!`, '#ff6666');
+                    };
+                } else {
+                    // Unlocked level styling
+                    if (isCompleted) {
+                        button.style.borderColor = '#00ff00';
+                        button.style.boxShadow = '0 0 10px #00ff0033';
+                    }
+                    
+                    button.innerHTML = `
+                        <div style="font-size: 1.5rem; margin-bottom: 5px;">
+                            ${isCompleted ? '✅' : level.icon}
+                        </div>
+                        <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 3px;">Level ${i}</div>
+                        <div style="font-size: 0.8rem; margin-bottom: 5px;">${level.name}</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">
+                            ${level.factors.length === 1 ? `×${level.factors[0]} facts` : 'Mixed facts'}
+                            ${isCompleted ? ' ✓' : ''}
+                        </div>
+                    `;
+                    
+                    button.onclick = () => {
+                        currentLevel = i;
+                        resetLevelProgress();
+                        closeLevelSelector();
+                        showFeedback(`Welcome to Level ${i}! 🚀`, level.color);
+                    };
+                }
+                
+                grid.appendChild(button);
+            }
+            
+            modal.style.display = 'flex';
+        }
+        
+        function closeLevelSelector() {
+            document.getElementById('levelSelectorModal').style.display = 'none';
+        }
+        
+        function setupInput() {
+            const input = document.getElementById('answerInput');
+            if (input) {
+                const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+                if (isTouchDevice) {
+                    // This prevents the mobile keyboard but still allows your keypad to work.
+                    input.readOnly = true;
+                }
+                
+                input.focus(); // Keep autofocus for desktop.
+                
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkAnswer();
+                    }
+                });
+            }
+        }
+        
+        // Initialize the game
+        window.addEventListener('load', function() {
+            createCosmicBackground();
+            generateQuestion();
+            updateDisplay();
+            setupInput();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d2dded36f7867',t:'MTc1NjQ4MjM2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./Cosmic Multiplication Adventure Official_files/saved_resource.html"></iframe>
+
+</body></html>            .question { font-size: 2rem; }
             .header { margin-bottom: 10px; }
             .question-area { padding: 10px; }
         }
